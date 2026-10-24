@@ -1,0 +1,10 @@
+{
+  "name": "lampRabit",
+  "short_name": "lampRabit",
+  "description": "Your local PHP stack, without the setup.",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#f4f7f6",
+  "theme_color": "#f4f7f6",
+  "icons": [{ "src": "./lamprabit-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
+}
