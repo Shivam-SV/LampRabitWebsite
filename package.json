@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build && node ./scripts/prerender.mjs",
+    "sync": "node ./scripts/sync-content.mjs",
+    "build": "node ./scripts/sync-content.mjs && vite build && node ./scripts/prerender.mjs",
     "preview": "vite preview"
   },
   "dependencies": {

@@ -4,7 +4,7 @@
   "description": "Your local PHP stack, without the setup.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#f4f7f6",
-  "theme_color": "#f4f7f6",
+  "background_color": "#12161c",
+  "theme_color": "#12161c",
   "icons": [{ "src": "./lamprabit-mark.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }]
 }

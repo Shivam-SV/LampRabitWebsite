@@ -1,6 +1,6 @@
 # Installing lampRabit
 
-> **Status:** installers are coming soon (they ship with the first public release). Until then lampRabit can be built from source; see "Building from source" below. Download links on the website should point to the GitHub Releases page: https://github.com/Shivam-SV/LambRabit/releases
+> **Status:** installers for every platform are on the GitHub Releases page: https://github.com/Shivam-SV/LambRabit/releases/latest. Windows is fully supported; macOS and Linux are in preview (the app runs, but Apache, Nginx and PHP can't be downloaded there yet; see the table below).
 
 ## System requirements
 
@@ -24,18 +24,19 @@
 ## Install
 
 ### Windows
-1. Download `lampRabit-setup.exe` (or the `.msi` for managed installs) from the Releases page.
+1. Download `lampRabit_<version>_x64-setup.exe` (or the `.msi` for managed installs) from the Releases page.
 2. Run it. lampRabit installs per user; administrator rights aren't required for the app itself.
-3. If Apache or PHP later report missing DLLs, install the Microsoft Visual C++ 2015–2022 Redistributable (x64) from Microsoft. (An automatic check is coming soon; the Diagnostics report already shows whether it's present.)
+3. **"Windows protected your PC"** appears because the installer isn't code-signed yet. Click **More info**, then **Run anyway**.
+4. Apache and PHP need the Microsoft Visual C++ 2015–2022 Redistributable (x64). lampRabit checks for it and shows an **Install** button on the Overview page if it's missing.
 
 ### macOS
-1. Download `lampRabit.dmg`.
+1. Download `lampRabit_<version>_aarch64.dmg` (Apple Silicon: M1 and later) or `lampRabit_<version>_x64.dmg` (Intel).
 2. Open it and drag lampRabit to Applications.
-3. Open lampRabit from Applications.
+3. Open lampRabit. Because it isn't signed yet, macOS says it can't be opened: go to **System Settings → Privacy & Security**, scroll down and click **Open Anyway**, then confirm. (Or right-click the app in Applications and choose **Open**.) You only need to do this once.
 
 ### Linux
-- **AppImage:** download, make it executable (`chmod +x lampRabit.AppImage`), run it.
-- **Debian/Ubuntu:** `sudo apt install ./lampRabit.deb`
+- **AppImage:** download `lampRabit_<version>_amd64.AppImage`, make it executable (`chmod +x lampRabit_*.AppImage`) and run it.
+- **Debian/Ubuntu:** `sudo apt install ./lampRabit_<version>_amd64.deb`
 
 ## First run
 

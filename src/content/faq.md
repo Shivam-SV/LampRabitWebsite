@@ -63,7 +63,7 @@ Host `127.0.0.1`, port `3306`, user `root`, no password.
 Install it on the Services page (Developer tools), then use the MariaDB card's **Open phpMyAdmin** button or the quick link on Overview. It's also at `http://localhost/phpmyadmin`.
 
 **I switched MariaDB to an older major version and it won't start.**
-The data directory was created by the newer version. Switch back. (Separate data per major version is coming soon.)
+lampRabit blocks this to protect your data: the files were last used by a newer MariaDB. Switch back to that version on the Services page. Moving up to a newer version is fine; lampRabit upgrades the system tables automatically.
 
 ## Email
 

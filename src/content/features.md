@@ -42,13 +42,26 @@ Run Apache, Nginx, or both. With both, Apache keeps ports 80/443 and Nginx gets 
 
 Platform note: Nginx downloads are Windows-only for now (nginx.org publishes Windows builds only); macOS and Linux support is coming soon.
 
-### Coming soon
-- **System tray**: start/stop services and open sites from the tray.
-- **Start with the computer** and optionally start services automatically.
-- **Open a terminal** with PHP, Composer, MariaDB and Node on the PATH.
-- **Open in editor**: open a project in VS Code or another editor.
-- **Visual C++ runtime check**: detect and offer to install the Microsoft runtime Apache and PHP need on Windows.
-- **MariaDB data per major version**: switching MariaDB major versions keeps separate data directories (or upgrades them) instead of risking incompatibility.
+### System tray (Available)
+lampRabit lives in the system tray: start or stop everything, open the www folder or a terminal, and quit from its menu. Closing the window keeps your services running (you can turn this off).
+
+### Start with your computer (Available)
+Start lampRabit when you sign in (it opens quietly in the tray), and optionally start all services as soon as it opens.
+
+### Open a terminal (Available)
+A terminal with PHP, Composer and the MariaDB client on the PATH, from the title bar, the tray or any site card (opens in the project folder).
+
+### PHP, Composer and MariaDB on your PATH (Available)
+One switch in Settings puts `php`, `composer`, `mysql`, `mariadb`, `mysqldump` and friends on your PATH, so they work in any terminal, IDE or script. They always run the versions you've made active, with lampRabit's php.ini and database port, and inside a site that has its own PHP version, `php` and `composer` use that version automatically. No admin rights needed; on macOS and Linux it's a marked block in your shell profile that's removed cleanly when you switch it off.
+
+### Open in editor (Available)
+Open any project in VS Code, Cursor, PhpStorm, Sublime Text, Zed or another editor command of your choice.
+
+### Visual C++ runtime check (Available, Windows)
+Apache and PHP on Windows need Microsoft's Visual C++ runtime. lampRabit checks for it and, if it's missing, installs it with one click (one administrator prompt).
+
+### Safe MariaDB upgrades (Available)
+lampRabit remembers which MariaDB version last used your databases. Moving to a newer release upgrades the system tables automatically; moving back to an older one is blocked with an explanation, because it can damage data.
 
 ---
 
@@ -63,11 +76,8 @@ Pick the PHP version for a site from its card on the Sites page. lampRabit runs 
 ### Sensible defaults (Available)
 Each PHP version gets its own `php.ini` with developer-friendly settings: errors shown, 512 MB memory limit, 128 MB uploads, OPcache on (with instant reloads), and common extensions enabled (curl, gd, intl, mbstring, mysqli, openssl, pdo_mysql, pdo_sqlite, sodium, zip and more). Per-project overrides work through a `.user.ini` file in the project.
 
-### PHP extension manager (Coming soon)
-Browse every extension for each installed PHP version, switch them on or off, and add popular extras like Xdebug, Redis, APCu, Imagick, MongoDB and PCOV with one click. Each extension shows whether it's built in, enabled, downloadable for that PHP version, or unavailable on your platform, and why. Xdebug comes preconfigured for step debugging.
-
-### FrankenPHP (Coming soon)
-Run sites on FrankenPHP, the modern PHP application server built on Caddy, as a third option next to Apache and Nginx. It brings HTTP/3 and an optional worker mode that keeps Laravel (Octane) and Symfony apps booted between requests for much faster responses. Uses lampRabit's trusted certificates and Mailpit like every other site. Available on Windows, Linux and Apple Silicon Macs.
+### PHP extension manager (Available, Windows)
+Browse every extension for each installed PHP version, switch them on or off, and add popular extras with one click: Xdebug, Redis (phpredis), APCu, igbinary, MongoDB, PCOV, Imagick and YAML. Each extra shows the version available for that exact PHP release, or "no build for PHP 8.x yet". Xdebug comes preconfigured for step debugging (trigger mode, port 9003), and PHP restarts automatically when you change something. On macOS and Linux this arrives with lampRabit's PHP downloads for those platforms.
 
 ### Worker pools (Available)
 On Windows each PHP version runs as several worker processes (4 by default, adjustable) so pages load in parallel. Crashed workers restart automatically; a worker that keeps crashing is stopped and reported instead of looping.
@@ -88,10 +98,21 @@ When Apache starts, lampRabit adds your sites to the system hosts file, with one
 ### Apply changes (Available)
 Add a folder while the server is running and lampRabit offers to apply it: domains, certificates and the hosts file update together.
 
+### Create a project (Available)
+A guided "New project" dialog: name the project (with a live preview of its URL), pick a preset, choose the PHP version, web server and HTTPS, and optionally create a database. Progress and tool output stream live; if anything fails, nothing is left behind and you can try again.
+
+### Project presets (Available)
+- **Blank PHP** and **Static site**: ready instantly.
+- **Laravel**: the latest Laravel via Composer, with `.env` already pointing at the new MariaDB database and Mailpit, and migrations run.
+- **Symfony**: the Symfony skeleton with `DATABASE_URL` and `MAILER_DSN` set.
+- **WordPress**: the latest release (checksum-verified) with `wp-config.php` written, including fresh security keys; finish the install in the browser.
+
+Composer is downloaded and verified the first time it's needed.
+
 ### Coming soon
-- **Create a project**: a guided setup for a new project: name, folder, preset, database, HTTPS.
-- **Project presets**: ready-made setups for Blank PHP, Laravel, WordPress, Symfony and static sites, with the right PHP version and an optional database (and database user), Mailpit or Redis. Composer and WordPress are downloaded automatically.
-- **Share a site through Ngrok or Cloudflare**: expose a project on a public URL from its card, either automatically or by entering a port.
+- **More presets**: dedicated database users and Redis for presets that use them.
+### Share a site on the internet (Available)
+Put any site on a public URL from its card, for testing webhooks, showing a client or trying a phone. Requests reach the site with its own domain, so virtual hosts keep working. Share any other local port too (for example a Node dev server). Choose Cloudflare quick tunnels (no account, random trycloudflare.com address) or Ngrok (free account; your authtoken is kept in the system keychain, never in a file). Apps that store their own URL (WordPress, Laravel's `APP_URL`) may still redirect to the `.test` domain.
 
 ---
 
@@ -106,8 +127,11 @@ Install either or both from Services. They're served at `phpmyadmin.test` and `a
 ### Command-line client (Available; Windows)
 Open the MariaDB client in a terminal, already connected, from the MariaDB card's menu.
 
-### Coming soon
-- **Redis and Memcached**: install and run them where supported. Redis and Memcached have no official Windows builds, so on Windows lampRabit offers a Redis-compatible server (such as Garnet) or explains the limitation; on macOS and Linux it manages a package-manager install. PHP extensions are offered only where builds exist for your PHP version.
+### Redis (Available)
+A Redis-compatible server on every platform: Microsoft's Garnet, installed from Services together with a private .NET runtime (nothing is installed system-wide). It runs on port 6379 with health checks and logs like every other service. Data is kept in memory, which suits caches, sessions and queues in development. PHP apps can use it through Predis or the phpredis extension (one click in the PHP extension manager).
+
+### Memcached (Available on macOS and Linux)
+lampRabit runs the `memcached` installed on your system (`brew install memcached` or `apt install memcached`). There are no maintained Memcached builds for Windows, so on Windows lampRabit explains this and suggests Redis instead.
 
 ---
 
@@ -123,8 +147,9 @@ PHP's `mail()` is pointed at Mailpit for you (Windows: php.ini SMTP settings; ma
 
 ## 6. Developer tools and runtimes (Coming soon)
 
-- **Node.js through NVM**: install NVM when you ask for it (not by default), then install and switch Node versions from lampRabit. Projects with an `.nvmrc` get the right version. Windows uses nvm-windows (which needs administrator rights or Developer Mode to switch versions; lampRabit tells you before installing); macOS and Linux use the official nvm. An existing NVM installation is detected and reused.
-- **Ngrok and Cloudflare tunnels**: share `localhost` or any project on a public URL. Ngrok needs a free account (your token is stored in the system keychain); Cloudflare quick tunnels need no account.
+### Node.js through NVM (Available)
+lampRabit manages Node.js versions through NVM. If you already use NVM it's detected and reused; otherwise it's installed only when you ask (Windows: the official nvm-windows installer, with one administrator prompt; macOS and Linux: the official nvm script). Install, switch the default and remove Node versions from Services, with LTS releases labelled. Sites show the Node version their `.nvmrc` asks for, and warn if it isn't installed. On Windows, switching versions needs administrator approval unless Developer Mode is on; lampRabit tells you which applies.
+- **Tunnels** are available now; see "Share a site on the internet" under Sites.
 
 ---
 
@@ -147,14 +172,21 @@ One click produces a report with versions, Microsoft runtime presence, service h
 ## 8. App
 
 ### Modern interface (Available)
-Overview dashboard with live status, quick links and recent activity; light, dark and system themes; custom title bar; works at any window size.
+Overview dashboard with live status, quick links and recent activity; light, dark and system themes; custom title bar; works at any window size. Subtle motion makes it feel responsive: pages and dialogs ease in, buttons give under the cursor, and the rabbit in the title bar twitches its ears, looks around and wiggles its nose every few minutes.
+
+### Motion you control (Available)
+Settings → Appearance → Motion: follow the system's reduce-motion preference (default), full motion, reduced (gentle fades only; nothing slides, bounces or plays by itself), or off.
 
 ### Platform-aware (Available)
 Settings and tools only appear where they apply. For example the PHP worker count is a Windows setting, and hosts-file paths and certificate steps match your OS.
 
+### App updates (Available from the first release)
+lampRabit checks GitHub for a new version when it starts (you can turn this off), shows it in the title bar, and installs it in place after you confirm. Updates are cryptographically signed; your environment, sites and databases are untouched.
+
+### Runtime update notices (Available)
+When a newer patch of an installed Apache, Nginx, PHP, MariaDB, Mailpit, Adminer, phpMyAdmin or Redis is available (for example PHP 8.4.27 → 8.4.30), Services shows a badge and a one-click install. New versions are installed alongside the old one; you switch when you're ready.
+
 ### Coming soon
-- **App updates**: lampRabit checks for new versions and updates itself (signed releases).
-- **Runtime update notices**: a badge when a newer patch of an installed Apache, PHP or MariaDB is available.
 - **Installers**: Windows (`.exe` / `.msi`), macOS (`.dmg`), Linux (`.AppImage`, `.deb`).
 
 ---
