@@ -27,7 +27,7 @@ try {
         name: 'lampRabit',
         url: siteRoot,
         logo: `${siteRoot}lamprabit-mark.svg`,
-        sameAs: [`https://github.com/Shivam-SV/LambRabit`],
+        sameAs: [`https://github.com/Shivam-SV/LampRabit`],
       },
       {
         '@type': 'WebSite',
@@ -46,7 +46,7 @@ try {
         isAccessibleForFree: true,
         offers: { '@type': 'Offer', price: '0', priceCurrency: 'USD' },
         url: siteRoot,
-        codeRepository: 'https://github.com/Shivam-SV/LambRabit',
+        codeRepository: 'https://github.com/Shivam-SV/LampRabit',
       },
     ],
   }

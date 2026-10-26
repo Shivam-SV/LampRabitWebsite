@@ -82,7 +82,7 @@ export default function DownloadPage() {
             <h2>Build from source</h2>
             <p>You need Node.js 22+, Rust and the Tauri prerequisites for your OS.</p>
             <pre className="code-block">{`git clone ${REPO_URL}.git
-cd LambRabit
+cd LampRabit
 npm install
 npm run tauri dev`}</pre>
             <a className="text-link" href={`${REPO_URL}/blob/main/CONTRIBUTING.md`}>Contributing guide <ArrowUpRight size={16} /></a>

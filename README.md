@@ -1,6 +1,6 @@
 # lampRabit website
 
-The website for [lampRabit](https://github.com/Shivam-SV/LambRabit), a free and open-source local PHP development environment. React + Vite, pre-rendered to static HTML for every route, deployed to GitHub Pages.
+The website for [lampRabit](https://github.com/Shivam-SV/LampRabit), a free and open-source local PHP development environment. React + Vite, pre-rendered to static HTML for every route, deployed to GitHub Pages.
 
 ## Run locally
 
