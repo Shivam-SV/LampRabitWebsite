@@ -3,7 +3,7 @@
 import fs from 'node:fs/promises'
 import path from 'node:path'
 
-const RAW = 'https://raw.githubusercontent.com/Shivam-SV/LambRabit/main/docs/website'
+const RAW = 'https://raw.githubusercontent.com/Shivam-SV/LampRabit/main/docs/website'
 const FILES = ['features.md', 'installation.md', 'faq.md', 'migrate-from-xampp.md', 'migrate-from-laragon.md']
 const outDir = path.join(process.cwd(), 'src', 'content')
 

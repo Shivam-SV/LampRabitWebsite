@@ -10,6 +10,7 @@ Status labels: **Available** (in the app today) and **Coming soon** (designed an
 - **Real HTTPS, locally.** lampRabit creates its own certificate authority and trusted certificates for every site, sub-domains included.
 - **Any PHP version, per project.** Run PHP 8.1 to 8.5 side by side; each site picks its own.
 - **Apache, Nginx, or both.** Choose per site.
+- **Command line included.** `php`, `composer` and the MariaDB tools on your PATH, following each site's PHP version.
 - **Batteries included.** phpMyAdmin, Adminer and Mailpit, installed with one click.
 - **Tells you what's wrong.** Health checks, port-conflict detection that names the program in the way, and a diagnostics report.
 
@@ -71,7 +72,7 @@ lampRabit remembers which MariaDB version last used your databases. Moving to a 
 Install PHP 8.1, 8.2, 8.3, 8.4 and 8.5 together. Each site uses the default version or its own.
 
 ### Per-site PHP version (Available)
-Pick the PHP version for a site from its card on the Sites page. lampRabit runs a pool of PHP FastCGI workers for each version in use and routes each site to the right one.
+Pick the PHP version for a site from its card on the Sites page. lampRabit runs a pool of PHP FastCGI workers for each version in use and routes each site to the right one. In a terminal, `php` and `composer` inside that site's folder use the same version.
 
 ### Sensible defaults (Available)
 Each PHP version gets its own `php.ini` with developer-friendly settings: errors shown, 512 MB memory limit, 128 MB uploads, OPcache on (with instant reloads), and common extensions enabled (curl, gd, intl, mbstring, mysqli, openssl, pdo_mysql, pdo_sqlite, sodium, zip and more). Per-project overrides work through a `.user.ini` file in the project.
@@ -145,11 +146,10 @@ PHP's `mail()` is pointed at Mailpit for you (Windows: php.ini SMTP settings; ma
 
 ---
 
-## 6. Developer tools and runtimes (Coming soon)
+## 6. Developer tools and runtimes
 
 ### Node.js through NVM (Available)
 lampRabit manages Node.js versions through NVM. If you already use NVM it's detected and reused; otherwise it's installed only when you ask (Windows: the official nvm-windows installer, with one administrator prompt; macOS and Linux: the official nvm script). Install, switch the default and remove Node versions from Services, with LTS releases labelled. Sites show the Node version their `.nvmrc` asks for, and warn if it isn't installed. On Windows, switching versions needs administrator approval unless Developer Mode is on; lampRabit tells you which applies.
-- **Tunnels** are available now; see "Share a site on the internet" under Sites.
 
 ---
 
@@ -180,14 +180,18 @@ Settings → Appearance → Motion: follow the system's reduce-motion preference
 ### Platform-aware (Available)
 Settings and tools only appear where they apply. For example the PHP worker count is a Windows setting, and hosts-file paths and certificate steps match your OS.
 
-### App updates (Available from the first release)
+### App updates (Available)
 lampRabit checks GitHub for a new version when it starts (you can turn this off), shows it in the title bar, and installs it in place after you confirm. Updates are cryptographically signed; your environment, sites and databases are untouched.
 
 ### Runtime update notices (Available)
 When a newer patch of an installed Apache, Nginx, PHP, MariaDB, Mailpit, Adminer, phpMyAdmin or Redis is available (for example PHP 8.4.27 → 8.4.30), Services shows a badge and a one-click install. New versions are installed alongside the old one; you switch when you're ready.
 
+### Installers (Available)
+Windows (`.exe` / `.msi`), macOS for Apple Silicon and Intel (`.dmg`), and Linux (`.AppImage`, `.deb`) from GitHub Releases. Builds aren't code-signed yet, so Windows and macOS show a warning on first launch; the installation guide explains the one-time step.
+
 ### Coming soon
-- **Installers**: Windows (`.exe` / `.msi`), macOS (`.dmg`), Linux (`.AppImage`, `.deb`).
+- **Code-signed installers** for Windows and macOS.
+- **Apache, Nginx and PHP downloads on macOS and Linux**, making those platforms fully supported.
 
 ---
 
@@ -204,7 +208,7 @@ When a newer patch of an installed Apache, Nginx, PHP, MariaDB, Mailpit, Adminer
 | Health checks and diagnostics report | Yes | No | No |
 | Mail catcher | Mailpit | Mercury | Mailpit option |
 | Runs without administrator rights | Yes (asks only for hosts and certificates) | Often needs admin | Usually run as admin |
-| macOS and Linux | Yes (downloads partial for now) | Yes | Windows only |
+| macOS and Linux | Preview (Apache, Nginx and PHP downloads coming) | Yes | Windows only |
 | Open source | Yes | Yes | Source available |
 
 Keep the comparison factual and update it if competitors change; avoid disparaging language.
